@@ -1,19 +1,21 @@
 class Solution {
 public:
     string reverseWords(string s) {
-      stringstream ss(s);
-        string word;
-        string result = "";
+      reverse(s.begin(),s.end());
+      int i=0,k=0;int n=s.size();
+      while(i<n){
+        while(i<n && s[i]==' ')i++;
 
-        // Extract words one by one (stringstream automatically skips spaces)
-        while (ss >> word) {
-            if (result.empty()) {
-                result = word;
-            } else {
-                result = word + " " + result; // Prepend new word to reverse the order
-            }
+        if(i!=n && k>0){
+            s[k++]=' ';
         }
+        int start_index = k;
+        while(i<n && s[i]!= ' ')s[k++]=s[i++];
 
-        return result;
+        reverse(s.begin()+start_index,s.begin()+k);
+      }
+      s.resize(k);
+      return s;
+      
        }
     };
